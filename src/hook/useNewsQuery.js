@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { CategoryContext } from "../Context";
+import { CategoryContext, SearchContext } from "../Context";
+import { BASE_URL } from "../utils/config";
 
 const useNewsQuery = () => {
   const [newsData, setnewsData] = useState({});
@@ -10,6 +11,7 @@ const useNewsQuery = () => {
 
   const [error, setError] = useState(null);
   const { selectedCategory } = useContext(CategoryContext);
+  const { searchedText } = useContext(SearchContext);
 
   const fetchNewsData = async (categoryName = null) => {
     try {
@@ -23,10 +25,10 @@ const useNewsQuery = () => {
 
       if (categoryName) {
         response = await fetch(
-          `http://localhost:8000/v2/top-headlines?category=${categoryName}`
+          `${BASE_URL}/top-headlines?category=${categoryName}`
         );
       } else {
-        response = await fetch(`http://localhost:8000/v2/top-headlines`);
+        response = await fetch(`${BASE_URL}/top-headlines`);
       }
 
       if (!response.ok) {
@@ -48,6 +50,39 @@ const useNewsQuery = () => {
     }
   };
 
+  const fetchSearchedData = async () => {
+    try {
+      setLoading({
+        ...loading,
+        state: true,
+        message: "Fetching news data...",
+      });
+
+      const response = await fetch(`${BASE_URL}/search?q=${searchedText}`);
+
+      if (!response.ok) {
+        const errorMessage = `Fetching news data failed: ${response.status}`;
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+
+      console.log(data);
+      setnewsData({
+        articles:[...data?.result]
+      })
+      
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading({
+        ...loading,
+        state: false,
+        message: "",
+      });
+    }
+  };
+
   useEffect(() => {
     setLoading({
       ...loading,
@@ -57,10 +92,16 @@ const useNewsQuery = () => {
 
     if (selectedCategory) {
       fetchNewsData(selectedCategory);
-    } else {
+    }   
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    if (searchedText) {
+      fetchSearchedData()
+    }else{
       fetchNewsData();
     }
-  }, [selectedCategory]);
+  }, [searchedText]);
 
   return {
     newsData,
