@@ -16,63 +16,63 @@ export default function Footer() {
           />
           <ul role="list" className="space-y-4">
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Home</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >General</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Business</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Entertainment</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Health</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Science</a
               >
             </li>
           </ul>
           <ul role="list" className="space-y-4">
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Sports</a
               >
             </li>
             <li>
-              <a href="#" className="text-sm font-semibold"
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm font-semibold"
               >Technology</a
               >
             </li>
           </ul>
           <ul role="list" className="space-y-4">
             <li>
-              <a href="#" className="text-sm">Terms of Use</a>
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Terms of Use</a>
             </li>
-            <li><a href="#" className="text-sm">Privacy</a></li>
+            <li><a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Privacy</a></li>
             <li>
-              <a href="#" className="text-sm">Cookies Policy</a>
-            </li>
-            <li>
-              <a href="#" className="text-sm">Manage Cookies</a>
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Cookies Policy</a>
             </li>
             <li>
-              <a href="#" className="text-sm">Accessibility</a>
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Manage Cookies</a>
             </li>
-            <li><a href="#" className="text-sm">Contact Us</a></li>
+            <li>
+              <a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Accessibility</a>
+            </li>
+            <li><a href="#" onClick={(e)=>e.preventDefault} className="text-sm">Contact Us</a></li>
           </ul>
           <div className="flex space-x-6">
             <a>
@@ -89,7 +89,7 @@ export default function Footer() {
                 />
               </svg>
             </a>
-            <a href="#">
+            <a href="#" onClick={(e)=>e.preventDefault}>
               <svg
                 className="h-6 w-6"
                 fill="currentColor"
@@ -103,7 +103,7 @@ export default function Footer() {
                 />
               </svg>
             </a>
-            <a href="#">
+            <a href="#" onClick={(e)=>e.preventDefault}>
               <svg
                 className="h-6 w-6"
                 fill="currentColor"

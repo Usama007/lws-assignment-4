@@ -10,7 +10,7 @@ const useNewsQuery = () => {
   });
 
   const [error, setError] = useState(null);
-  const { selectedCategory } = useContext(CategoryContext);
+  const { selectedCategory,setselectedCategory } = useContext(CategoryContext);
   const { searchedText } = useContext(SearchContext);
 
   const fetchNewsData = async (categoryName = null) => {
@@ -66,8 +66,7 @@ const useNewsQuery = () => {
       }
 
       const data = await response.json();
-
-      console.log(data);
+      setselectedCategory(null)
       setnewsData({
         articles:[...data?.result]
       })

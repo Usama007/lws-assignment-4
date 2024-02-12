@@ -1,40 +1,23 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/logo.png'
-import search from '../../assets/icons/search.svg'
 import { getCurrentDate } from '../../utils/currentDate'
 import { useDebounce } from '../../hook';
-import { NewsContext, SearchContext } from '../../Context';
+import { SearchContext } from '../../Context';
 
 export default function HeaderTop() {
-    const [showSearchfield, setshowSearchfield] = useState(false)
     const { setsearchedText } = useContext(SearchContext);
-    const inputRef = useRef()
-
-    useEffect(() => {
-        if (showSearchfield && inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, [showSearchfield])
-
-
-    const handleSearchIcon = () => {
-        setshowSearchfield(true)
-    }
 
     const doSearch = useDebounce((term) => {
         setsearchedText(term)
     }, 500);
 
-    function handleChange(e) {
+    const handleChange = (e) => {
         const value = e.target.value;
         doSearch(value);
     }
 
     return (
-        <div
-            className="container mx-auto flex flex-wrap items-center justify-between gap-6"
-        >
-
+        <div className="container mx-auto flex flex-wrap items-center justify-between gap-6"        >
             <div className="flex items-center space-x-4">
                 <svg
                     width="16"
@@ -88,32 +71,22 @@ export default function HeaderTop() {
                 </svg>
                 <span>{getCurrentDate()}</span>
             </div>
-
-            <a href="/">
+            <a href="/"  onClick={(e) => e.preventDefault()}>
                 <img
                     className="max-w-[100px] md:max-w-[165px]"
                     src={logo}
                     alt="Lws"
                 />
             </a>
-
-            {/* <div class="relative rounded-md border border-gray-300 flex items-center">
-                <input ref={test} type="search" class="bg-white w-full px-4 py-2 border-r-0 rounded-l-md text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 focus:outline-none focus:border-sky-500" placeholder="Search..."/>
-               
-            </div> */}
-
-
-            <div className="flex items-center space-x-3 lg:space-x-8 mt-20000">
-                {showSearchfield && (
-                    <input
-                        ref={inputRef}
-                        className="bg-transparent  placeholder:text-gray text-black w-full text-lg md:text-base  border-2"
-                        placeholder="Search Location"
-                        onChange={handleChange}
-
-                    />
-                )}
-                <img src={search} onClick={handleSearchIcon} />
+            <div className="flex items-center space-x-3 lg:space-x-8">
+                <div className="relative">
+                    <input type="text" placeholder="Search news..." className="w-full py-2 pl-8 pr-4 border border-gray-300 rounded-full bg-transparent focus:outline-none focus:border-emerald-300 focus:ring-1 focus:ring-emerald-300" onChange={handleChange} />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
     )
