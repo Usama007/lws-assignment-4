@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 import logo from '../../assets/logo.png'
 import { getCurrentDate } from '../../utils/currentDate'
 import { useDebounce } from '../../hook';
-import { SearchContext } from '../../Context';
+import { CategoryContext, SearchContext } from '../../Context';
 
 export default function HeaderTop() {
     const { setsearchedText } = useContext(SearchContext);
+    const { setselectedCategory } = useContext(CategoryContext);
+
 
     const doSearch = useDebounce((term) => {
         setsearchedText(term)
@@ -71,7 +73,10 @@ export default function HeaderTop() {
                 </svg>
                 <span>{getCurrentDate()}</span>
             </div>
-            <a href="/"  onClick={(e) => e.preventDefault()}>
+            <a href="/"  onClick={(e) => {
+                e.preventDefault();
+                setselectedCategory('all')
+            }}>
                 <img
                     className="max-w-[100px] md:max-w-[165px]"
                     src={logo}

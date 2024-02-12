@@ -23,7 +23,7 @@ const useNewsQuery = () => {
 
       let response;
 
-      if (categoryName) {
+      if (categoryName && categoryName!=='all') {
         response = await fetch(
           `${BASE_URL}/top-headlines?category=${categoryName}`
         );
@@ -91,6 +91,8 @@ const useNewsQuery = () => {
 
     if (selectedCategory) {
       fetchNewsData(selectedCategory);
+    }else if(selectedCategory === 'all'){
+      fetchNewsData()
     }   
   }, [selectedCategory]);
 
